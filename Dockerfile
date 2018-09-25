@@ -1,7 +1,7 @@
 
-FROM python:2.7
+FROM alpine:3.7
 EXPOSE 5000
-LABEL maintainer "gaetancollaud@gmail.com"
+LABEL maintainer "cmotch@gmail.com"
 
 ENV CURA_VERSION=15.04.6
 ARG tag=master
@@ -9,10 +9,10 @@ ARG tag=master
 WORKDIR /opt/octoprint
 
 # In case of alpine
-#RUN apk update && apk upgrade \
-#    && apk add --no-cache bash git openssh gcc\
-#		&& pip install virtualenv \
-#		&& rm -rf /var/cache/apk/*
+RUN apk update && apk upgrade \
+    && apk add --no-cache bash git openssh gcc\
+		&& pip install virtualenv \
+		&& rm -rf /var/cache/apk/*
 
 #install ffmpeg
 RUN cd /tmp \
@@ -32,7 +32,7 @@ RUN cd /tmp \
   && rm -Rf /tmp/*
 
 #Create an octoprint user
-RUN useradd -ms /bin/bash octoprint && adduser octoprint dialout
+RUN useradd -ms /bin/bash octoprint && adduser octoprint uucp
 RUN chown octoprint:octoprint /opt/octoprint
 USER octoprint
 #This fixes issues with the volume command setting wrong permissions

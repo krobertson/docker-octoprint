@@ -5,7 +5,7 @@ This repository contains everything you need to run [Octoprint](https://github.c
 # Getting started
 
 ```
-git clone https://github.com/OctoPrint/docker.git octoprint-docker && cd octoprint-docker
+git clone https://github.com/bodrick/Octoprint.git octoprint-docker && cd octoprint-docker
 
 # search for you 3D printer serial port (usually it's /dev/ttyUSB0 or /dev/ttyACM0)
 ls /dev | grep tty
@@ -22,7 +22,7 @@ You can display the log using `docker-compose logs -f`
 
 ## Without docker-compose
 ```
-docker run -d -v ./config:/home/octoprint/.octoprint --device /dev/ttyACM0:/dev/ttyACM0 -p 5000:5000 --name octoprint octoprint/octoprint
+docker run -d -v ./config:/home/octoprint/.octoprint --device /dev/ttyACM0:/dev/ttyACM0 -p 5000:5000 --name octoprint bodrick/octoprint
 ```
 
 # Additional tools
