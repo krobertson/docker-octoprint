@@ -9,4 +9,5 @@ services:
     devices:
       - /dev/ttyACM0:/dev/ttyACM0
     volumes:
-     - ./config:/home/octoprint/.octoprint
+       - octoprint_data:/home/octoprint/.octoprint
+       - octoprint-packages:/opt/octoprint/venv/lib/python2.7/site-packages

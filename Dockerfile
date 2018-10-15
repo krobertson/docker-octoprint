@@ -1,35 +1,34 @@
+FROM python:2-slim
 
-FROM alpine:3.7
-EXPOSE 5000
-LABEL maintainer "cmotch@gmail.com"
+# Group ID for serial device access
+# Maps to uucp on arch
+ARG PGID=14
+
+LABEL maintainer="cmotch@gmail.com"
 
 ENV CURA_VERSION=15.04.6
-ARG tag=1.3.9
+ENV OCTO_VERSION=1.3.9
+
+EXPOSE 5000
 
 WORKDIR /opt/octoprint
 
-# In case of alpine
-RUN apk add --update \
-    python \
-    python-dev \
-    py-pip \
-    build-base \
-    libexecinfo-dev \
-    bash \
-    git \
-    openssh \
-    linux-headers \
-  && pip install virtualenv \
-  && rm -rf /var/cache/apk/*
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  build-essential \
+  wget \
+  && rm -rf /var/lib/apt/lists/*
 
-#install ffmpeg
+# Install virtualenv
+RUN pip install --no-cache-dir virtualenv
+
+# Install ffmpeg
 RUN cd /tmp \
   && wget -O ffmpeg.tar.xz https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-32bit-static.tar.xz \
   && mkdir -p /opt/ffmpeg \
   && tar xvf ffmpeg.tar.xz -C /opt/ffmpeg --strip-components=1 \
   && rm -Rf /tmp/*
 
-#install Cura
+# Install Cura
 RUN cd /tmp \
   && wget https://github.com/Ultimaker/CuraEngine/archive/${CURA_VERSION}.tar.gz \
   && tar -zxf ${CURA_VERSION}.tar.gz \
@@ -39,24 +38,21 @@ RUN cd /tmp \
   && mv -f ./build /opt/cura/ \
   && rm -Rf /tmp/*
 
-#Create an octoprint user
-RUN addgroup -S octoprint \
-  && adduser -S octoprint -G octoprint
+RUN groupadd -g ${PGID} serial
+# Create an octoprint user
+RUN useradd -ms /bin/bash octoprint && adduser octoprint dialout && adduser octoprint serial
 
-# RUN addgroup -S uucp \
-  # && adduser -S octoprint -G uucp 
-
-RUN chown octoprint:octoprint /opt/octoprint
+# Install Octoprint
+RUN mkdir -p /opt/octoprint
+RUN chown -R octoprint:octoprint /opt/octoprint
 USER octoprint
 #This fixes issues with the volume command setting wrong permissions
 RUN mkdir /home/octoprint/.octoprint
 
-#Install Octoprint
-RUN git clone --branch $tag https://github.com/foosel/OctoPrint.git /opt/octoprint \
+RUN wget -qO- https://github.com/foosel/OctoPrint/archive/${OCTO_VERSION}.tar.gz | tar xz -C /opt/octoprint --strip-components=1 \
   && virtualenv venv \
   && ./venv/bin/python setup.py install
 
 VOLUME /home/octoprint/.octoprint
-
 
 CMD ["/opt/octoprint/venv/bin/octoprint", "serve"]
