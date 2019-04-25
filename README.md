@@ -1,11 +1,11 @@
-# OctoPrint-docker [![Build Status](https://travis-ci.org/bodrick/Octoprint.svg?branch=master)](https://travis-ci.org/bodrick/Octoprint)
+# docker-octoprint
 
 This repository contains everything you need to run [Octoprint](https://github.com/foosel/OctoPrint) in a docker environment.
 
 # Getting started
 
 ```
-git clone https://github.com/bodrick/Octoprint.git octoprint-docker && cd octoprint-docker
+git clone https://github.com/krobertson/docker-octoprint.git && cd docker-octoprint
 
 # search for you 3D printer serial port (usually it's /dev/ttyUSB0 or /dev/ttyACM0)
 ls /dev | grep tty
@@ -30,7 +30,3 @@ docker run -d -v ./config:/home/octoprint/.octoprint --device /dev/ttyACM0:/dev/
 ## FFMPEG
 
 Octoprint allows you to make timelapses using an IP webcam and ffmpeg. It is installed in `/opt/ffmpeg`
-
-## Cura Engine
-
-Octoprint allows you to import .STL files and slice them directly in the application. For this you need to upload the profiles that you want to use (you can export them from Cura). Cura Engine is installed in `/opt/cura/CuraEngine`.
