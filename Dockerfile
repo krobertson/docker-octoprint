@@ -4,7 +4,7 @@ FROM python:2-slim
 # Maps to uucp on arch
 ARG PGID=987
 
-ENV OCTO_VERSION=1.3.11
+ENV OCTO_VERSION=1.3.12
 
 RUN set -ex \
   && apt-get update \
