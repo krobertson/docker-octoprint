@@ -1,10 +1,10 @@
-FROM python:2-slim
+FROM python:slim
 
 # Group ID for serial device access
 # Maps to uucp on arch
 ARG PGID=987
 
-ENV OCTO_VERSION=1.3.12
+ENV OCTO_VERSION=1.4.0
 
 RUN set -ex \
   && apt-get update \
