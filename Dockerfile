@@ -8,7 +8,7 @@ ENV OCTO_VERSION=1.4.0
 
 RUN set -ex \
   && apt-get update \
-  && apt-get install -y --no-install-recommends build-essential wget \
+  && apt-get install -y --no-install-recommends build-essential wget python3-numpy libatlas-base-dev \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
@@ -65,20 +65,16 @@ RUN set -ex \
   && ./venv/bin/pip install "https://github.com/MoonshineSG/OctoPrint-Autoscroll/archive/master.zip" \
   && ./venv/bin/pip install "https://github.com/OctoPrint/OctoPrint-Autoselect/archive/master.zip" \
   && ./venv/bin/pip install "https://github.com/jneilliii/OctoPrint-BedLevelVisualizer/archive/master.zip" \
-  && ./venv/bin/pip install "https://github.com/tjjfvi/OctoPrint-BetterHeaterTimeout/archive/master.zip" \
-  && ./venv/bin/pip install "https://github.com/ntoff/OctoPrint-ExtraDistance/archive/master.zip" \
-  && ./venv/bin/pip install "https://github.com/ntoff/OctoPrint-FanSpeedSlider/archive/master.zip" \
   && ./venv/bin/pip install "https://github.com/jneilliii/OctoPrint-FloatingNavbar/archive/master.zip" \
   && ./venv/bin/pip install "https://github.com/BillyBlaze/OctoPrint-FullScreen/archive/master.zip" \
-  && ./venv/bin/pip install "https://github.com/chatrat12/layerdisplay/archive/master.zip" \
-  && ./venv/bin/pip install "https://github.com/FormerLurker/Octolapse/archive/v0.3.4.zip" \
+  && ./venv/bin/pip install "https://github.com/aerickson/layerdisplay/archive/py3_compat/master.zip" \
   && ./venv/bin/pip install "https://github.com/marian42/octoprint-preheat/archive/master.zip" \
-  && ./venv/bin/pip install "https://github.com/imrahil/OctoPrint-PrintHistory/archive/master.zip" \
-  && ./venv/bin/pip install "https://github.com/amsbr/OctoPrint-Stats/archive/master.zip" \
+  && ./venv/bin/pip install "https://github.com/OllisGit/OctoPrint-PrintJobHistory/archive/master.zip" \
+  && ./venv/bin/pip install "https://github.com/benjamin-salchow/OctoPrint-Stats/archive/master.zip" \
+  && ./venv/bin/pip install "https://github.com/jneilliii/OctoPrint-StickyPad/archive/master.zip" \
   && ./venv/bin/pip install "https://github.com/eyal0/OctoPrint-PrintTimeGenius/archive/master.zip" \
   && ./venv/bin/pip install "https://github.com/BrokenFire/OctoPrint-SimpleEmergencyStop/archive/master.zip" \
-  && ./venv/bin/pip install "https://github.com/jneilliii/OctoPrint-TabOrder/archive/master.zip" \
-  && ./venv/bin/pip install "https://github.com/malnvenshorn/OctoPrint-WebcamTab/archive/master.zip"
+  && ./venv/bin/pip install "https://github.com/jneilliii/OctoPrint-TabOrder/archive/master.zip"
 
 EXPOSE 5000
 VOLUME /home/octoprint/.octoprint
