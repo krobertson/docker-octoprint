@@ -68,6 +68,7 @@ RUN set -ex \
   && ./venv/bin/pip install "https://github.com/jneilliii/OctoPrint-FloatingNavbar/archive/master.zip" \
   && ./venv/bin/pip install "https://github.com/BillyBlaze/OctoPrint-FullScreen/archive/master.zip" \
   && ./venv/bin/pip install "https://github.com/aerickson/layerdisplay/archive/py3_compat/master.zip" \
+  && ./venv/bin/pip install "https://github.com/gdombiak/OctoPrint-OctoPod/archive/master.zip" \
   && ./venv/bin/pip install "https://github.com/marian42/octoprint-preheat/archive/master.zip" \
   && ./venv/bin/pip install "https://github.com/OllisGit/OctoPrint-PrintJobHistory/archive/master.zip" \
   && ./venv/bin/pip install "https://github.com/benjamin-salchow/OctoPrint-Stats/archive/master.zip" \
